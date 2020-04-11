@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "yoda"
+version = "0.1.0"
+description = ""
+authors = ["Antti Ajanki <antti.ajanki@iki.fi>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fi-experimental-web-md = {url = "https://github.com/aajanki/spacy-fi/releases/download/v0.2.0/fi_experimental_web_md-0.2.0-py3-none-any.whl"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
