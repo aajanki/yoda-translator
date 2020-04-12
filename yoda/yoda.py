@@ -10,37 +10,29 @@ class Yoda():
         self.nlp.add_pipe(self.nlp.create_pipe('sentencizer'))
 
     def __call__(self, text: str) -> str:
-        """Reorder words in each sentence of text in XSV order."""
+        """Reorder words in each sentence of text in XSV order.
+
+        X is the object or other verb modifier.
+
+        Object (obj):
+        Lapset lukivat kirjaa. -> Kirjaa lapset lukivat.
+
+        Oblique nominal (obl):
+        Etsimme taskulampun kanssa. -> Taskulampun kanssa etsimme.
+
+        Open clausal complement (xcomp):
+        Oletin sinun muuttavan mieltäsi. -> Sinun mieltäsi muuttavan oletin.
+
+        Adverbial modifier (advmod):
+        Katsoin eilen. -> Eilen katsoin.
+
+        """
         transformed = [self.reorder(sent.as_doc())
                        for sent in self.nlp(text).sents]
         return self._join_with_spaces(transformed)
 
     def reorder(self, doc: Doc) -> str:
         subtree = self._find_child_dep(doc, ['obj', 'xcomp', 'obl', 'advmod'])
-        return self._reorder_subtree(doc, subtree)
-
-    def reorder_osv(self, sentence: str) -> str:
-        """Reorder the words in a sentence in the object-subject-verb order."""
-        doc = self.nlp(sentence)
-        obj = self._find_child_dep(doc, ['obj'])
-        return self._reorder_subtree(doc, obj)
-
-    def reorder_xsv(self, sentence: str) -> str:
-        """Reorder non-object complement to the verb as the first term.
-
-        This is the "XSV order" where X is something else that the object.
-
-        (obl)
-        Etsimme taskulampun kanssa. -> Taskulampun kanssa etsimme.
-
-        (xcomp)
-        Oletin sinun muuttavan mieltäsi. -> Sinun mieltäsi muuttavan oletin.
-        
-        (advmod)
-        Katsoin eilen. -> Eilen katsoin.
-        """
-        doc = self.nlp(sentence)
-        subtree = self._find_child_dep(doc, ['xcomp', 'obl', 'advmod'])
         return self._reorder_subtree(doc, subtree)
 
     def _reorder_subtree(self, doc: Doc, subtree: Token) -> str:
