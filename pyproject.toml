@@ -7,6 +7,7 @@ authors = ["Antti Ajanki <antti.ajanki@iki.fi>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 fi-experimental-web-md = {url = "https://github.com/aajanki/spacy-fi/releases/download/v0.2.0/fi_experimental_web_md-0.2.0-py3-none-any.whl"}
+spacy = ">=2.2.4,<3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

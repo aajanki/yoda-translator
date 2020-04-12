@@ -89,6 +89,7 @@ voikko = ">=0.5"
 reference = ""
 type = "url"
 url = "https://github.com/aajanki/spacy-fi/releases/download/v0.2.0/fi_experimental_web_md-0.2.0-py3-none-any.whl"
+
 [[package]]
 category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -349,7 +350,7 @@ python-versions = "*"
 version = "0.1.9"
 
 [metadata]
-content-hash = "7400b423498a966ced9c9a611cb2300b7e7cf5462edca749cde88d742cca698f"
+content-hash = "2e7628b50193d408b73fa8c808c98bcb120ec363c45c96823ed370c41b7bc8cd"
 python-versions = "^3.8"
 
 [metadata.files]
