@@ -60,7 +60,7 @@ class Yoda():
 
     def _find_child_dep(self, doc, deps):
         for t in doc:
-            if t.dep_ == 'ROOT':
+            if t.dep_ == 'ROOT' and t.pos_ in ['VERB', 'AUX']:
                 for child in t.children:
                     if child.dep_.split(':', 1)[0] in deps:
                         return child

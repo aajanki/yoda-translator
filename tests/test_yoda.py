@@ -67,10 +67,9 @@ def test_reorder_xcomp():
 
 
 def test_reorder_advmod():
-    assert yoda('Etene varovasti!') == 'Varovasti etene!'
+    assert yoda('Kävele varovasti!') == 'Varovasti kävele!'
 
-    assert (yoda('Avaimet olivat kadoksissa eilen.') ==
-            'Eilen avaimet olivat kadoksissa.')
+    assert yoda('Avaimet katosivat eilen.') == 'Eilen avaimet katosivat.'
 
 
 def test_reorder_start_with_advmod():
