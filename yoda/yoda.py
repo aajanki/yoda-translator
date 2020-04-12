@@ -82,3 +82,11 @@ class Yoda():
                 needs_whitespace = not s[-1].isspace()
 
         return ''.join(res)
+
+
+if __name__ == '__main__':
+    import sys
+
+    if len(sys.argv) >= 2:
+        process = Yoda()
+        print(process(open(sys.argv[1]).read()))
