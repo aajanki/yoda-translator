@@ -48,7 +48,9 @@ def reorder_subtree(doc: Doc, subtree: Token) -> str:
     ]
     rest_texts = [x for x in rest_texts if x]
     rest_text = sep.join(rest_texts)
-    rest_text = rest_text[0].lower() + rest_text[1:]
+
+    if subtree.left_edge.i > 0 and doc[0].pos_ != 'PROPN':
+        rest_text = rest_text[0].lower() + rest_text[1:]
 
     sep2 = ', ' if any(t.text == ',' for t in span) else ' '
     return subtree_text + sep2 + rest_text

@@ -59,6 +59,10 @@ def test_reorder_osv_no_change_without_object():
         assert reorder_osv(s) == s
 
 
+def test_reorder_osv_proper_name():
+    assert reorder_osv('Niinistö piti puheen.') == 'Puheen Niinistö piti.'
+
+
 def test_reorder_xsv_xcomp():
     assert (reorder_xsv('Pyysin sinua vastaamaan!') ==
             'Sinua vastaamaan pyysin!')
