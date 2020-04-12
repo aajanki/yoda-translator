@@ -11,8 +11,9 @@ class Yoda():
 
     def __call__(self, text: str) -> str:
         """Reorder words in each sentence of text in XSV order."""
-        return ' '.join(self.reorder(sent.as_doc())
-                        for sent in self.nlp(text).sents)
+        transformed = [self.reorder(sent.as_doc())
+                       for sent in self.nlp(text).sents]
+        return self._join_with_spaces(transformed)
 
     def reorder(self, doc: Doc) -> str:
         subtree = self._find_child_dep(doc, ['obj', 'xcomp', 'obl', 'advmod'])
@@ -75,3 +76,17 @@ class Yoda():
                 return None
 
         return None
+
+    def _join_with_spaces(self, sentences):
+        res = []
+        needs_whitespace = False
+        for s in sentences:
+            if needs_whitespace and s and not s[0].isspace():
+                res.append(' ')
+
+            res.append(s)
+
+            if s:
+                needs_whitespace = not s[-1].isspace()
+
+        return ''.join(res)

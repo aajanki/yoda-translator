@@ -17,11 +17,15 @@ sentences_without_object = [
 
 
 def test_reorder_empty():
-    assert yoda.reorder_osv('') == ''
+    assert yoda('') == ''
+
+
+def test_reorder_whitespace():
+    assert yoda('\n\n ') == '\n\n '
 
 
 def test_reorder_one_word():
-    assert yoda.reorder_osv('Tule') == 'Tule'
+    assert yoda('Tule') == 'Tule'
 
 
 def test_reorder_osv():
@@ -93,3 +97,8 @@ def test_reorder_xsv_simple_sentences():
 def test_reorder_multiple_sentences():
     assert (yoda('Kalle kiipesi puuhun. Omenat kasvoivat puussa.') ==
             'Puuhun Kalle kiipesi. Puussa omenat kasvoivat.')
+
+
+def test_reorder_multiple_sentences_whitespace():
+    assert (yoda('Kalle kiipesi puuhun.\n\nOmenat kasvoivat puussa.') ==
+            'Puuhun Kalle kiipesi.\n\nPuussa omenat kasvoivat.')
