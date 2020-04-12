@@ -27,7 +27,7 @@ class Yoda():
         Katsoin eilen. -> Eilen katsoin.
 
         """
-        transformed = [self.reorder(sent.as_doc())
+        transformed = [self.reorder(self.nlp(sent.text))
                        for sent in self.nlp(text).sents]
         return self._join_with_spaces(transformed)
 
