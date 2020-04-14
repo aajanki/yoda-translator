@@ -35,7 +35,7 @@ class YodaTranslator():
         return self._join_with_spaces(transformed)
 
     def reorder(self, doc: Doc) -> str:
-        subtree = self._find_child_dep(doc, ['obj', 'xcomp', 'obl', 'advmod'])
+        subtree = self._find_child_dep(doc, ['obj', 'xcomp', 'obl', 'advmod', 'acomp', 'dobj'])
         return self._reorder_subtree(doc, subtree)
 
     def _reorder_subtree(self, doc: Doc, subtree: Token) -> str:
