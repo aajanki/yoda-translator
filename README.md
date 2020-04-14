@@ -1,4 +1,4 @@
-# Yoda-sanajärjestys
+# Write like Yoda
 
 Tämä ohjelma muuttaa kirjoitetun tekstin sanajärjestyksen Yodan puheen
 sanajärjestykseksi.
@@ -9,6 +9,11 @@ Use [Poetry](https://python-poetry.org/docs/) to manage dependencies.
 
 ```
 poetry install
+```
+
+For English support, install the language model:
+```
+poetry run python -m spacy download en_core_web_sm
 ```
 
 ## Run

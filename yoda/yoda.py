@@ -1,12 +1,15 @@
+import sys
+import plac
 import spacy
 from spacy.tokens.doc import Doc
 from spacy.tokens.token import Token
 from spacy.tokens.span import Span
+from spacy.language import Language
 
 
-class Yoda():
-    def __init__(self):
-        self.nlp = spacy.load('fi_experimental_web_md')
+class YodaTranslator():
+    def __init__(self, spacy_model: Language):
+        self.nlp = spacy_model
         self.nlp.add_pipe(self.nlp.create_pipe('sentencizer'))
 
     def __call__(self, text: str) -> str:
@@ -84,9 +87,30 @@ class Yoda():
         return ''.join(res)
 
 
-if __name__ == '__main__':
-    import sys
+class YodaFi(YodaTranslator):
+    def __init__(self):
+        super().__init__(spacy.load('fi_experimental_web_md'))
 
-    if len(sys.argv) >= 2:
-        process = Yoda()
-        print(process(open(sys.argv[1]).read()))
+
+class YodaEn(YodaTranslator):
+    def __init__(self):
+        super().__init__(spacy.load('en_core_web_sm'))
+
+
+def main(lang: ('Language', 'option', 'g', str, ['en', 'fi']) = 'fi',
+         filename: 'Input file, use - for stdin'='-'):
+
+    if lang == 'fi':
+        translate = YodaFi()
+    elif lang == 'en':
+        translate = YodaEn()
+    else:
+        print(f'Unknown language {lang}')
+        sys.exit(1)
+
+    inp = sys.stdin if filename == '-' else open(filename)
+    print(translate(inp.read()))
+
+
+if __name__ == '__main__':
+    plac.call(main)
