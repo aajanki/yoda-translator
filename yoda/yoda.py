@@ -58,7 +58,7 @@ class YodaTranslator():
         if subtree.left_edge.i > 0 and doc[0].pos_ != 'PROPN':
             rest_text = rest_text[0].lower() + rest_text[1:]
 
-        sep2 = ', ' if any(t.text[:-1] == ',' for t in span) else ' '
+        sep2 = ', ' if any(t.text == ',' for t in span[:-1]) else ' '
         return subtree_text + sep2 + rest_text
 
     def _find_child_dep(self, doc, deps):
