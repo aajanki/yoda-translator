@@ -55,7 +55,9 @@ class YodaTranslator():
         rest_texts = [x for x in rest_texts if x]
         rest_text = sep.join(rest_texts)
 
-        if subtree.left_edge.i > 0 and doc[0].pos_ != 'PROPN':
+        if (subtree.left_edge.i > 0 and
+            doc[0].pos_ != 'PROPN' and
+            doc[0].text != 'I'):
             rest_text = rest_text[0].lower() + rest_text[1:]
 
         sep2 = ', ' if any(t.text == ',' for t in span[:-1]) else ' '
